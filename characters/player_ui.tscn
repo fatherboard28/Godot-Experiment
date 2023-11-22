@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://by5vw77d8mi78"]
+
+[ext_resource type="Script" path="res://characters/gui.gd" id="1_4lx7b"]
+
+[node name="player_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4lx7b")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.835
+anchor_top = 0.01
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.799927
+offset_top = -10.8
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VSplitContainer"]
+layout_mode = 2
+text = "Gen World"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="VSplitContainer/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "Sticks: 
+"
+
+[node name="number" type="Label" parent="VSplitContainer/HFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "0
+"
