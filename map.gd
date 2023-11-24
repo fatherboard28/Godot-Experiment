@@ -9,7 +9,7 @@ extends Node
 # 54 55 56 57 58 59 60 61 62 
 # 63 64 65 66 67 68 69 70 71 
 # 72 73 74 75 76 77 78 79 80
-enum tile_type {GRASS, WATER, TREE, ROCK, DEEPWATER}
+enum tile_type {GRASS, WATER, TREE, ROCK, DEEPWATER, EMPTY}
 var map = []
 
 class Add_Tile_Data:
@@ -76,7 +76,7 @@ func harvest_resource(pos : Vector2i) -> tile_type:
 		tmap.set_cell(1, pos, -1, Vector2i(-1,-1))
 		map[xy_to_index(pos.x, pos.y)] = tile_type.GRASS
 		return tile_type.TREE
-	return -1
+	return tile_type.EMPTY
 		
 func place_tile(pos : Vector2i, type : tile_type) -> bool:
 	if (pos.x > 8 || pos.x < 0 || pos.y > 8 || pos.y < 0):
@@ -104,8 +104,19 @@ func place_tile(pos : Vector2i, type : tile_type) -> bool:
 	return true
 
 	
-func _ready():
+func clear_world():
+	map = []
+	tmap.clear_layer(0)
+	tmap.clear_layer(1)
+	tmap.clear_layer(2)
+
+
+func create_world():
+	clear_world()
 	gen_world()
 	place_water()
 	place_trees()
+
+func _ready():
+	create_world()
 	

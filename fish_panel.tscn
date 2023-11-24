@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwbbroj7okj11"]
+
+[ext_resource type="Script" path="res://fish.gd" id="1_tryia"]
+[ext_resource type="Texture2D" uid="uid://cvj3wh46yx1jm" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Water.png" id="2_j3xkf"]
+[ext_resource type="Texture2D" uid="uid://tg5ouvyppgm8" path="res://art/Sprout Lands - Sprites - Basic pack/Objects/Egg item.png" id="3_0l13a"]
+[ext_resource type="Texture2D" uid="uid://q61m38lf2f3t" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Tilled Dirt.png" id="3_0s5fu"]
+[ext_resource type="Texture2D" uid="uid://vlnwin23376i" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Hills.png" id="7_ps7yl"]
+[ext_resource type="Texture2D" uid="uid://bjiucca2sto7v" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Wooden House.png" id="8_c1yo4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6g4u"]
+size = Vector2(10.5727, 10.3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08dgs"]
+size = Vector2(20, 14.2)
+
+[node name="fish_panel" type="CanvasLayer"]
+script = ExtResource("1_tryia")
+
+[node name="panel" type="Sprite2D" parent="."]
+position = Vector2(198, 470)
+rotation = 1.5708
+scale = Vector2(10, 10)
+texture = ExtResource("2_j3xkf")
+
+[node name="bar" type="Area2D" parent="panel"]
+unique_name_in_owner = true
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="panel/bar"]
+position = Vector2(-0.0999947, -0.0499954)
+scale = Vector2(1.816, 1)
+shape = SubResource("RectangleShape2D_u6g4u")
+
+[node name="bar_sprite" type="Sprite2D" parent="panel/bar"]
+scale = Vector2(1.816, 1)
+texture = ExtResource("3_0s5fu")
+hframes = 12
+vframes = 12
+frame = 1
+
+[node name="hook" type="Area2D" parent="panel"]
+unique_name_in_owner = true
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="panel/hook"]
+position = Vector2(0.0500069, 0)
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_08dgs")
+
+[node name="hook_sprite" type="Sprite2D" parent="panel/hook"]
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_0l13a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(312, 457)
+scale = Vector2(4.2775, 37.5091)
+texture = ExtResource("7_ps7yl")
+hframes = 10
+vframes = 8
+frame = 10
+
+[node name="progress" type="Sprite2D" parent="Sprite2D"]
+unique_name_in_owner = true
+position = Vector2(0.701332, 5.8919)
+scale = Vector2(1, 2)
+texture = ExtResource("8_c1yo4")
+offset = Vector2(2.08165e-12, -2.55)
+hframes = 16
+vframes = 16
+frame = 3
+
+[connection signal="area_entered" from="panel/bar" to="." method="_on_bar_area_entered"]
+[connection signal="area_exited" from="panel/bar" to="." method="_on_bar_area_exited"]

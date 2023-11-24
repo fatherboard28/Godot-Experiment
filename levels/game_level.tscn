@@ -1,19 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhhc4gsaykfmy"]
+[gd_scene load_steps=5 format=3 uid="uid://dhhc4gsaykfmy"]
 
 [ext_resource type="Script" path="res://levels/controller.gd" id="1_2nybt"]
 [ext_resource type="PackedScene" uid="uid://dlso8ithhfaqh" path="res://characters/player_cat.tscn" id="1_q4s3w"]
 [ext_resource type="PackedScene" uid="uid://by5vw77d8mi78" path="res://characters/player_ui.tscn" id="3_nf1e8"]
+[ext_resource type="PackedScene" uid="uid://cwbbroj7okj11" path="res://fish_panel.tscn" id="3_xov3t"]
 
 [node name="GameLevel" type="Node2D"]
 position = Vector2(2, 0)
 script = ExtResource("1_2nybt")
 
-[node name="Player Cat" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("1_q4s3w")]
+[node name="player_ui" parent="." instance=ExtResource("3_nf1e8")]
+unique_name_in_owner = true
+
+[node name="fish_panel" parent="player_ui" instance=ExtResource("3_xov3t")]
+
+[node name="player" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("1_q4s3w")]
+unique_name_in_owner = true
 controller = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(75, 75)
-offset = Vector2(2.08165e-12, 2.08165e-12)
-
-[node name="player_ui" parent="." instance=ExtResource("3_nf1e8")]
-unique_name_in_owner = true

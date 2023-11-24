@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ueeegly5v3ac"]
+[gd_scene load_steps=15 format=3 uid="uid://ueeegly5v3ac"]
 
 [ext_resource type="Script" path="res://map.gd" id="1_kiw8r"]
 [ext_resource type="Texture2D" uid="uid://dn572sgpeq4qj" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Grass.png" id="2_lskmb"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cvj3wh46yx1jm" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Water.png" id="4_vqjoa"]
 [ext_resource type="Texture2D" uid="uid://dc7vi2w2cg1kh" path="res://art/Sprout Lands - Sprites - Basic pack/Objects/Basic Grass Biom things 1.png" id="4_xggbx"]
 [ext_resource type="Texture2D" uid="uid://cs6jbeg4sv3r5" path="res://art/Sprout Lands - Sprites - Basic pack/Characters/Tools.png" id="5_uw6fw"]
+[ext_resource type="Texture2D" uid="uid://in2kfbs4my7e" path="res://IMG_0078.PNG" id="7_lmc1c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ygjh3"]
 texture = ExtResource("2_lskmb")
@@ -240,22 +241,28 @@ texture = ExtResource("5_uw6fw")
 4:5/0 = 0
 5:5/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5h1q"]
+texture = ExtResource("7_lmc1c")
+texture_region_size = Vector2i(2048, 2048)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_5vqb3"]
 sources/0 = SubResource("TileSetAtlasSource_ygjh3")
 sources/1 = SubResource("TileSetAtlasSource_xo38i")
 sources/2 = SubResource("TileSetAtlasSource_ws5mk")
 sources/3 = SubResource("TileSetAtlasSource_u704x")
 sources/10 = SubResource("TileSetAtlasSource_2xoyd")
+sources/5 = SubResource("TileSetAtlasSource_l5h1q")
 
 [node name="Map" type="Node"]
 script = ExtResource("1_kiw8r")
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2(120, 19)
 tile_set = SubResource("TileSet_5vqb3")
 collision_animatable = true
 format = 2
 layer_0/name = "Floor"
-layer_0/tile_data = PackedInt32Array(0, 65536, 0, 65536, 65536, 0, 131072, 65536, 0, 196608, 65536, 0, 262144, 65536, 0, 327680, 65536, 0, 393216, 65536, 0, 458752, 65536, 0, 524288, 65536, 0, 524289, 65536, 0, 524290, 65536, 0, 524291, 65536, 0, 524292, 65536, 0, 524293, 65536, 0, 524294, 65536, 0, 524295, 65536, 0, 524296, 65536, 0)
 layer_1/name = "Decor"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)

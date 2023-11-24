@@ -61,6 +61,9 @@ func handle_move(direction : Vector2i):
 		map.highlight_selected(tmp)
 
 func _ready():
+	spawn_player()
+
+func spawn_player():
 	var rng = RandomNumberGenerator.new()
 	var x : int = 0
 	var y : int = 0
@@ -70,6 +73,7 @@ func _ready():
 	pos = Vector2i(x,y)
 	position = map.tmap.map_to_local(pos)
 	animation_tree.set("parameters/Idle/blend_position", Vector2(0,1))
+
 
 func _physics_process(_delta):
 	if (Input.is_action_just_pressed("down")):
