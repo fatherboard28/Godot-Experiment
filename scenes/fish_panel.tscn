@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cwbbroj7okj11"]
 
-[ext_resource type="Script" path="res://fish.gd" id="1_tryia"]
+[ext_resource type="Script" path="res://scripts/fish.gd" id="1_tryia"]
 [ext_resource type="Texture2D" uid="uid://cvj3wh46yx1jm" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Water.png" id="2_j3xkf"]
 [ext_resource type="Texture2D" uid="uid://tg5ouvyppgm8" path="res://art/Sprout Lands - Sprites - Basic pack/Objects/Egg item.png" id="3_0l13a"]
 [ext_resource type="Texture2D" uid="uid://q61m38lf2f3t" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Tilled Dirt.png" id="3_0s5fu"]
@@ -24,7 +24,6 @@ texture = ExtResource("2_j3xkf")
 
 [node name="bar" type="Area2D" parent="panel"]
 unique_name_in_owner = true
-scale = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="panel/bar"]
 position = Vector2(-0.0999947, -0.0499954)
@@ -40,7 +39,6 @@ frame = 1
 
 [node name="hook" type="Area2D" parent="panel"]
 unique_name_in_owner = true
-scale = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="panel/hook"]
 position = Vector2(0.0500069, 0)

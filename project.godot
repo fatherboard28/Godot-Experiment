@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Godot Crash Course"
-run/main_scene="res://levels/game_level.tscn"
+run/main_scene="res://scenes/game_level.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Map="*res://characters/map.tscn"
+Map="*res://scenes/map.tscn"
 
 [display]
 

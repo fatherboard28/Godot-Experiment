@@ -1,5 +1,5 @@
 extends CanvasLayer
-class_name UI
+#class_name UI
 
 @onready var map = get_node("/root/Map")
 @onready var wood_label = %number

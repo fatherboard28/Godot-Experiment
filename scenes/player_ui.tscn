@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://by5vw77d8mi78"]
 
-[ext_resource type="Script" path="res://characters/gui.gd" id="1_4lx7b"]
+[ext_resource type="Script" path="res://scripts/gui.gd" id="1_bty7a"]
 
 [node name="player_ui" type="CanvasLayer"]
-script = ExtResource("1_4lx7b")
+script = ExtResource("1_bty7a")
 
 [node name="-0-113" type="VSplitContainer" parent="."]
 anchors_preset = -1
