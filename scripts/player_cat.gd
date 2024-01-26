@@ -48,14 +48,17 @@ var dir : Direction = Direction.new()
 
 func handle_move(direction : Vector2i):
 	var tmp = Vector2i(pos.x + direction.x, pos.y + direction.y)
+	if (tmp.x > 9 || tmp.x < 0 || tmp.y > 9 || tmp.y < 0):
+		return false
 	if (dir.get_dir(direction) && map.map[map.xy_to_index(tmp.x, tmp.y)] == map.tile_type.GRASS):
 		pos = tmp
 		position = map.tmap.map_to_local(pos)
+		map.tmap.clear_layer(3)
 		dir.set_dir(direction,false)
 	else:
 		dir.clear_all()
 		selection = direction + pos
-		map.tmap.clear_layer(2)
+		map.tmap.clear_layer(3)
 		dir.set_dir(direction,true)
 		animation_tree.set("parameters/Idle/blend_position", direction)
 		map.highlight_selected(tmp)

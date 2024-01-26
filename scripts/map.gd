@@ -9,7 +9,7 @@ extends Node
 # 54 55 56 57 58 59 60 61 62 
 # 63 64 65 66 67 68 69 70 71 
 # 72 73 74 75 76 77 78 79 80
-enum tile_type {GRASS, WATER, TREE, ROCK, DEEPWATER, EMPTY}
+enum tile_type {GRASS, WATER, TREE, TREE_TOP, ROCK, DEEPWATER, EMPTY}
 var map = []
 
 class Add_Tile_Data:
@@ -27,17 +27,17 @@ func gen_world():
 	for x in 10:
 		for y in 10:
 			map.append(tile_type.GRASS)
-			tmap.set_cell(0, Vector2i(x,y), 0, Vector2i(0,0))
+			tmap.set_cell(0, Vector2i(x,y), 7, Vector2i(0,1))
 			
 			
 func highlight_selected(pos : Vector2i):
 	match map[xy_to_index(pos.x, pos.y)]:
 		tile_type.GRASS:
-			tmap.set_cell(2, pos, 1, Vector2i(7,1))
+			tmap.set_cell(3, pos, 7, Vector2i(2,4))
 		tile_type.TREE:
-			tmap.set_cell(2, pos, 3, Vector2i(1,2))
+			tmap.set_cell(3, pos, 7, Vector2i(2,5))
 		tile_type.WATER, tile_type.DEEPWATER:
-			tmap.set_cell(2, pos, 2, Vector2i(2,3))
+			tmap.set_cell(3, pos, 2, Vector2i(2,3))
 		
 	
 func place_trees():
@@ -79,28 +79,32 @@ func harvest_resource(pos : Vector2i) -> tile_type:
 	return tile_type.EMPTY
 		
 func place_tile(pos : Vector2i, type : tile_type) -> bool:
-	if (pos.x > 8 || pos.x < 0 || pos.y > 8 || pos.y < 0):
+	if ((pos.x > 8 || pos.x < 0 || pos.y > 8 || pos.y < 0) && type != tile_type.TREE_TOP):
 		return false
 		
 	var index = xy_to_index(pos.x, pos.y)
 	
 	match type:
 		tile_type.GRASS:
-			tmap.set_cell(0, pos, 0, Vector2i(0,0))
+			tmap.set_cell(0, pos, 7, Vector2i(0,1))
 		tile_type.WATER:
-			tmap.set_cell(0, pos, 10, Vector2i(0,0))
+			tmap.set_cell(0, pos, 7, Vector2i(0,0))
 		tile_type.TREE:
 			if (map[index] == tile_type.GRASS):
-				tmap.set_cell(1, pos, 2, Vector2i(1,3))
+				tmap.set_cell(1, pos, 7, Vector2i(0,3))
+				place_tile(Vector2i(pos.x, pos.y-1), tile_type.TREE_TOP)
 			else:
 				return false
+		tile_type.TREE_TOP:
+			tmap.set_cell(2, pos, 7, Vector2i(0,2))
 		tile_type.ROCK:
 			if (map[index] == tile_type.GRASS):
 				tmap.set_cell(1, pos, 2, Vector2i(8,1))
 			else:
 				return false
 				
-	map[index] = type
+	if type != tile_type.TREE_TOP:
+		map[index] = type
 	return true
 
 	

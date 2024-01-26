@@ -1,14 +1,14 @@
 [gd_scene load_steps=9 format=3 uid="uid://cwbbroj7okj11"]
 
 [ext_resource type="Script" path="res://scripts/fish.gd" id="1_tryia"]
-[ext_resource type="Texture2D" uid="uid://cvj3wh46yx1jm" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Water.png" id="2_j3xkf"]
+[ext_resource type="Texture2D" uid="uid://bdcmnjlhs6ilt" path="res://art/testart/barart2.png" id="2_0var0"]
 [ext_resource type="Texture2D" uid="uid://tg5ouvyppgm8" path="res://art/Sprout Lands - Sprites - Basic pack/Objects/Egg item.png" id="3_0l13a"]
 [ext_resource type="Texture2D" uid="uid://q61m38lf2f3t" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Tilled Dirt.png" id="3_0s5fu"]
 [ext_resource type="Texture2D" uid="uid://vlnwin23376i" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Hills.png" id="7_ps7yl"]
 [ext_resource type="Texture2D" uid="uid://bjiucca2sto7v" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Wooden House.png" id="8_c1yo4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u6g4u"]
-size = Vector2(10.5727, 10.3)
+size = Vector2(7.93745, 23.0928)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08dgs"]
 size = Vector2(20, 14.2)
@@ -17,21 +17,22 @@ size = Vector2(20, 14.2)
 script = ExtResource("1_tryia")
 
 [node name="panel" type="Sprite2D" parent="."]
-position = Vector2(198, 470)
-rotation = 1.5708
-scale = Vector2(10, 10)
-texture = ExtResource("2_j3xkf")
+unique_name_in_owner = true
+position = Vector2(186, 475)
+scale = Vector2(5.20312, 4.54688)
+texture = ExtResource("2_0var0")
 
 [node name="bar" type="Area2D" parent="panel"]
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="panel/bar"]
-position = Vector2(-0.0999947, -0.0499954)
+position = Vector2(0.0960922, -0.329872)
 scale = Vector2(1.816, 1)
 shape = SubResource("RectangleShape2D_u6g4u")
 
 [node name="bar_sprite" type="Sprite2D" parent="panel/bar"]
-scale = Vector2(1.816, 1)
+position = Vector2(1.90735e-06, -0.65979)
+scale = Vector2(1.42692, 2.22131)
 texture = ExtResource("3_0s5fu")
 hframes = 12
 vframes = 12
@@ -47,7 +48,6 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_08dgs")
 
 [node name="hook_sprite" type="Sprite2D" parent="panel/hook"]
-rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_0l13a")
 

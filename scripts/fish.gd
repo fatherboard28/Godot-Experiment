@@ -11,9 +11,11 @@ var velocity : float = 0
 
 var bar_vel : float = 0
 
-var points : float = 15
-var max_points : float = 50
+var points : float = 10
+var max_points : float = 100
 var count_points : bool = false
+
+var bounds : int = 45
 
 var win : bool = false
 var lose : bool = false
@@ -38,31 +40,31 @@ func _process(_delta):
 		last_pressed = Time.get_ticks_msec()
 		velocity += .5 
 	
-	if (hook.position.x <= 25 && hook.position.x >= -25):
-		hook.position += Vector2((velocity*-1),0)
-		if (hook.position.x < -25):
+	if (hook.position.y <= bounds && hook.position.y >= (-1 * bounds)):
+		hook.position += Vector2(0,(velocity*-1))
+		if (hook.position.y < (-1 * bounds)):
 			velocity = 0
-			hook.position = Vector2(-25, hook.position.y)
+			hook.position = Vector2(hook.position.x, (-1 * bounds))
 
-	if (hook.position.x >= 25):
+	if (hook.position.y >= bounds):
 		velocity = 0
-		hook.position = Vector2(25, hook.position.y)
+		hook.position = Vector2(hook.position.x, bounds)
 	else:
 		velocity -= .4 * _delta
 
 	#move bar------------------------------------------------
 
-	if (bar.position.x <= 25 && bar.position.x >= -25):
-		bar.position = Vector2(fish_path_1(Time.get_ticks_msec()), 0)
-		if (bar.position.x < -25):
+	if (bar.position.y <= bounds && bar.position.y >= (-1*bounds)):
+		bar.position = Vector2(0, fish_path_1(Time.get_ticks_msec()))
+		if (bar.position.y < (-1*bounds)):
 			bar_vel = 0
-			bar.position = Vector2(-25, 0)
-		if (bar.position.x > 25):
+			bar.position = Vector2(0, (-1*bounds))
+		if (bar.position.y > bounds):
 			bar_vel= 0
-			bar.position = Vector2(25, 0)
+			bar.position = Vector2(0, bounds)
 	
 func fish_path_1(x : float) -> float:
-	return sin(x/800) * 20
+	return sin(x/1000) * 40
 
 
 
