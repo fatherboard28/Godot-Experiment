@@ -49,21 +49,32 @@ class Direction :
 var dir : Direction = Direction.new()
 
 func handle_move(direction : Vector2i):
+	map.tmap.clear_layer(highlight_layer)
 	var tmp = Vector2i(pos.x + direction.x, pos.y + direction.y)
 	if (tmp.x > 9 || tmp.x < 0 || tmp.y > 9 || tmp.y < 0):
 		return false
-	if (dir.get_dir(direction) && map.map[map.xy_to_index(tmp.x, tmp.y)] == map.tile_type.GRASS):
+	if (map.map[map.xy_to_index(tmp.x, tmp.y)] == map.tile_type.GRASS):
+		#move player
 		pos = tmp
-		position = map.tmap.map_to_local(pos)
-		map.tmap.clear_layer(highlight_layer)
-		dir.set_dir(direction,false)
-	else:
-		dir.clear_all()
-		selection = direction + pos
-		map.tmap.clear_layer(highlight_layer)
-		dir.set_dir(direction,true)
 		animation_tree.set("parameters/Idle/blend_position", direction)
-		map.highlight_selected(tmp)
+		position = map.tmap.map_to_local(pos)
+
+		#set new dir
+		dir.clear_all()
+		dir.set_dir(direction, true)
+
+	handle_look(direction)
+
+func handle_look(direction : Vector2i):
+	map.tmap.clear_layer(highlight_layer)
+	var tmp = Vector2i(pos.x + direction.x, pos.y + direction.y)
+	if (tmp.x > 9 || tmp.x < 0 || tmp.y > 9 || tmp.y < 0):
+		return false
+	dir.clear_all()
+	selection = direction + pos
+	dir.set_dir(direction,true)
+	animation_tree.set("parameters/Idle/blend_position", direction)
+	map.highlight_selected(tmp)
 
 func _ready():
 	spawn_player()
@@ -81,6 +92,14 @@ func spawn_player():
 
 
 func _physics_process(_delta):
+	if (Input.is_action_just_pressed("look_down")):
+		handle_look(Vector2i(0,1))
+	if (Input.is_action_just_pressed("look_up")):
+		handle_look(Vector2i(0,-1))
+	if (Input.is_action_just_pressed("look_left")):
+		handle_look(Vector2i(-1,0))
+	if (Input.is_action_just_pressed("look_right")):
+		handle_look(Vector2i(1,0))
 	if (Input.is_action_just_pressed("down")):
 		handle_move(Vector2i(0,1))
 	if (Input.is_action_just_pressed("up")):
