@@ -1,17 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwbbroj7okj11"]
+[gd_scene load_steps=7 format=3 uid="uid://cwbbroj7okj11"]
 
 [ext_resource type="Script" path="res://scripts/fish.gd" id="1_tryia"]
-[ext_resource type="Texture2D" uid="uid://bdcmnjlhs6ilt" path="res://art/testart/barart2.png" id="2_0var0"]
-[ext_resource type="Texture2D" uid="uid://tg5ouvyppgm8" path="res://art/Sprout Lands - Sprites - Basic pack/Objects/Egg item.png" id="3_0l13a"]
-[ext_resource type="Texture2D" uid="uid://q61m38lf2f3t" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Tilled Dirt.png" id="3_0s5fu"]
+[ext_resource type="Texture2D" uid="uid://bo3dri22p1kry" path="res://art/testart/newTest.png" id="2_lt8xn"]
 [ext_resource type="Texture2D" uid="uid://vlnwin23376i" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Hills.png" id="7_ps7yl"]
 [ext_resource type="Texture2D" uid="uid://bjiucca2sto7v" path="res://art/Sprout Lands - Sprites - Basic pack/Tilesets/Wooden House.png" id="8_c1yo4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u6g4u"]
-size = Vector2(7.93745, 23.0928)
+size = Vector2(5.57544, 10.125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08dgs"]
-size = Vector2(20, 14.2)
+size = Vector2(7.5, 14.2)
 
 [node name="fish_panel" type="CanvasLayer"]
 script = ExtResource("1_tryia")
@@ -19,37 +17,41 @@ script = ExtResource("1_tryia")
 [node name="panel" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(186, 475)
-scale = Vector2(5.20312, 4.54688)
-texture = ExtResource("2_0var0")
+scale = Vector2(8, 8)
+texture = ExtResource("2_lt8xn")
+hframes = 8
+vframes = 2
+frame = 8
 
 [node name="bar" type="Area2D" parent="panel"]
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="panel/bar"]
-position = Vector2(0.0960922, -0.329872)
+position = Vector2(0.0625019, -0.5625)
 scale = Vector2(1.816, 1)
 shape = SubResource("RectangleShape2D_u6g4u")
 
 [node name="bar_sprite" type="Sprite2D" parent="panel/bar"]
-position = Vector2(1.90735e-06, -0.65979)
-scale = Vector2(1.42692, 2.22131)
-texture = ExtResource("3_0s5fu")
-hframes = 12
-vframes = 12
-frame = 1
+position = Vector2(2.08165e-12, 2.08165e-12)
+texture = ExtResource("2_lt8xn")
+hframes = 8
+vframes = 8
+frame = 33
 
-[node name="hook" type="Area2D" parent="panel"]
+[node name="fish" type="Area2D" parent="panel"]
 unique_name_in_owner = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="panel/hook"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="panel/fish"]
 position = Vector2(0.0500069, 0)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_08dgs")
 
-[node name="hook_sprite" type="Sprite2D" parent="panel/hook"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_0l13a")
+[node name="hook_sprite" type="Sprite2D" parent="panel/fish"]
+texture = ExtResource("2_lt8xn")
+hframes = 8
+vframes = 8
+frame = 41
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(312, 457)

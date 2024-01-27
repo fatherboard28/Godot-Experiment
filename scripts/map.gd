@@ -71,12 +71,14 @@ func place_water():
 	for x in tile_to_add.size():
 		place_tile(tile_to_add[x].pos, tile_to_add[x].type)
 	
-func harvest_resource(pos : Vector2i) -> tile_type:
-	if (map[xy_to_index(pos.x, pos.y)] == tile_type.TREE):
-		tmap.set_cell(1, pos, -1, Vector2i(-1,-1))
-		map[xy_to_index(pos.x, pos.y)] = tile_type.GRASS
-		return tile_type.TREE
-	return tile_type.EMPTY
+func harvest_resource(pos : Vector2i, type : tile_type):
+	match type:
+		tile_type.TREE:
+			#remove  tree sprite
+			tmap.set_cell(1, pos, -1, Vector2i(-1,-1))
+			tmap.set_cell(2, Vector2i(pos.x, pos.y-1), -1, Vector2i(-1,-1))
+			#set the map tile to the correct thing
+			map[xy_to_index(pos.x, pos.y)] = tile_type.GRASS
 		
 func place_tile(pos : Vector2i, type : tile_type) -> bool:
 	if ((pos.x > 8 || pos.x < 0 || pos.y > 8 || pos.y < 0) && type != tile_type.TREE_TOP):

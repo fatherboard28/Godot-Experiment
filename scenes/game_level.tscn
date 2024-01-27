@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhhc4gsaykfmy"]
+[gd_scene load_steps=6 format=3 uid="uid://dhhc4gsaykfmy"]
 
 [ext_resource type="Script" path="res://scripts/controller.gd" id="1_2nybt"]
 [ext_resource type="PackedScene" uid="uid://dlso8ithhfaqh" path="res://scenes/player_cat.tscn" id="1_q4s3w"]
 [ext_resource type="PackedScene" uid="uid://by5vw77d8mi78" path="res://scenes/player_ui.tscn" id="3_nf1e8"]
 [ext_resource type="PackedScene" uid="uid://cwbbroj7okj11" path="res://scenes/fish_panel.tscn" id="3_xov3t"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="5_vm1xk"]
 
 [node name="GameLevel" type="Node2D"]
 position = Vector2(2, 0)
@@ -18,7 +19,9 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 controller = NodePath("..")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(2.08165e-12, 2.08165e-12)
-offset = Vector2(75, 75)
-zoom = Vector2(5, 5)
+offset = Vector2(2.08165e-12, 2.08165e-12)
+zoom = Vector2(10, 10)
+script = ExtResource("5_vm1xk")

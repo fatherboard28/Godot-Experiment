@@ -12,6 +12,8 @@ extends CharacterBody2D
 var pos : Vector2i
 var selection : Vector2i
 
+var highlight_layer = 3
+
 
 
 
@@ -53,12 +55,12 @@ func handle_move(direction : Vector2i):
 	if (dir.get_dir(direction) && map.map[map.xy_to_index(tmp.x, tmp.y)] == map.tile_type.GRASS):
 		pos = tmp
 		position = map.tmap.map_to_local(pos)
-		map.tmap.clear_layer(3)
+		map.tmap.clear_layer(highlight_layer)
 		dir.set_dir(direction,false)
 	else:
 		dir.clear_all()
 		selection = direction + pos
-		map.tmap.clear_layer(3)
+		map.tmap.clear_layer(highlight_layer)
 		dir.set_dir(direction,true)
 		animation_tree.set("parameters/Idle/blend_position", direction)
 		map.highlight_selected(tmp)
@@ -87,18 +89,40 @@ func _physics_process(_delta):
 		handle_move(Vector2i(-1,0))
 	if (Input.is_action_just_pressed("right")):
 		handle_move(Vector2i(1,0))
-	if (Input.is_action_just_pressed("harvest")):
-		var type = map.harvest_resource(selection)
+	if (Input.is_action_just_pressed("interact")):
+		var type = map.map[map.xy_to_index(selection.x,selection.y)]
 		match type:
+			map.tile_type.WATER:
+				var g = 1
+				#handle fishing
 			map.tile_type.TREE:
+				map.harvest_resource(selection, map.tile_type.TREE)
 				controller.update_ui_num(1)
 				
 		selection = Vector2i.ZERO
 		dir.clear_all()
-		map.tmap.clear_layer(2)
+		map.tmap.clear_layer(highlight_layer)
 
 func pick_new_state():
 	if(velocity != Vector2.ZERO):
 		state_machine.travel("Walk")
 	else:
 		state_machine.travel("Idle")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

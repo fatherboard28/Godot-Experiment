@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name Fishing
 
-@onready var hook = %hook
+@onready var fish = %fish
 @onready var bar = %bar
 @onready var last_pressed = Time.get_ticks_msec()
 @onready var bar_last_dir_changed = Time.get_ticks_msec()
@@ -9,13 +9,13 @@ class_name Fishing
 
 var velocity : float = 0
 
-var bar_vel : float = 0
+var fish_vel : float = 0
 
 var points : float = 10
 var max_points : float = 100
 var count_points : bool = false
 
-var bounds : int = 45
+var bounds : int = 24
 
 var win : bool = false
 var lose : bool = false
@@ -35,36 +35,35 @@ func _process(_delta):
 		progress.scale = Vector2(1,ratio)
 	
 
-	#move hook------------------------------------------------
+	#move bar------------------------------------------------
 	if (Input.is_action_just_pressed("reel") && last_pressed+250 < Time.get_ticks_msec()):
 		last_pressed = Time.get_ticks_msec()
-		velocity += .5 
+		velocity += .2 
 	
-	if (hook.position.y <= bounds && hook.position.y >= (-1 * bounds)):
-		hook.position += Vector2(0,(velocity*-1))
-		if (hook.position.y < (-1 * bounds)):
+	if (bar.position.y <= bounds && bar.position.y >= (-1 * bounds)):
+		bar.position += Vector2(0,(velocity*-1))
+		if (bar.position.y < (-1 * bounds)):
 			velocity = 0
-			hook.position = Vector2(hook.position.x, (-1 * bounds))
+			bar.position = Vector2(bar.position.x, (-1 * bounds))
 
-	if (hook.position.y >= bounds):
+	if (bar.position.y >= bounds):
 		velocity = 0
-		hook.position = Vector2(hook.position.x, bounds)
+		bar.position = Vector2(bar.position.x, bounds)
 	else:
-		velocity -= .4 * _delta
+		velocity -= .1 * _delta
 
-	#move bar------------------------------------------------
-
-	if (bar.position.y <= bounds && bar.position.y >= (-1*bounds)):
-		bar.position = Vector2(0, fish_path_1(Time.get_ticks_msec()))
-		if (bar.position.y < (-1*bounds)):
-			bar_vel = 0
-			bar.position = Vector2(0, (-1*bounds))
-		if (bar.position.y > bounds):
-			bar_vel= 0
-			bar.position = Vector2(0, bounds)
+	#move fish------------------------------------------------
+	if (fish.position.y <= bounds && fish.position.y >= (-1*bounds)):
+		fish.position = Vector2(0, fish_path_1(Time.get_ticks_msec()))
+		if (fish.position.y < (-1*bounds)):
+			fish_vel = 0
+			fish.position = Vector2(0, (-1*bounds))
+		if (fish.position.y > bounds):
+			fish_vel= 0
+			fish.position = Vector2(0, bounds)
 	
 func fish_path_1(x : float) -> float:
-	return sin(x/1000) * 40
+	return sin(x/1000) * 20
 
 
 
